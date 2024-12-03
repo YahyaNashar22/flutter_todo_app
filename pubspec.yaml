@@ -1,0 +1,48 @@
+name: todo_app
+description: "A new Flutter project."
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.3
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  google_fonts: ^6.2.1
+  flutter_svg: ^2.0.16
+  flutter_staggered_animations: ^1.1.1
+  flutter_local_notifications: ^18.0.1
+  rxdart: ^0.28.0
+  get_storage: ^2.1.1
+  get: ^4.6.6
+  sqflite: ^2.4.1
+  intl: ^0.19.0
+  date_picker_timeline: ^1.2.6
+  flutter_timezone: ^3.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.14.1
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "images/appicon.jpeg"
+  min_sdk_android: 24
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "images/appicon.jpeg"
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - images/person.jpeg
+    - images/task.svg
+    - images/appicon.jpeg
