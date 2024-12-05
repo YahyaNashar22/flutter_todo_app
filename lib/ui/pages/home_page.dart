@@ -206,13 +206,27 @@ class _HomePageState extends State<HomePage> {
                           DateFormat.yMd().parse(task.date!).day ==
                               _selectedDate.day)) {
                     // here we notify that the start time has began
-                    var date = DateFormat("hh:mm a").parse(task.startTime!);
-                    var myTime = DateFormat("HH:mm").format(date);
 
-                    notifyHelper.scheduledNotification(
-                        int.parse(myTime.toString().split(":")[0]),
-                        int.parse(myTime.toString().split(":")[1]),
-                        task);
+                    if (task.startTime != null &&
+                        RegExp(r'^\d{1,2}:\d{2}\s(?:AM|PM)$')
+                            .hasMatch(task.startTime!)) {
+                      var date = DateFormat("hh:mm a").parse(task.startTime!);
+                      var myTime = DateFormat("HH:mm").format(date);
+
+                      try {
+                        notifyHelper.scheduledNotification(
+                          int.parse(myTime.split(":")[0]),
+                          int.parse(myTime.split(":")[1]),
+                          task,
+                        );
+                      } catch (e) {
+                        print("Failed to schedule notification: $e");
+                      }
+                    } else {
+                      print(
+                          "Invalid or missing time format: ${task.startTime}");
+                    }
+
                     return AnimationConfiguration.staggeredList(
                       position: index,
                       duration: const Duration(seconds: 1),

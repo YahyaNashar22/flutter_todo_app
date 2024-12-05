@@ -306,21 +306,34 @@ class _AddTaskPageState extends State<AddTaskPage> {
       initialTime: isStartTime
           ? TimeOfDay.fromDateTime(DateTime.now())
           : TimeOfDay.fromDateTime(
-              DateTime.now().add(
-                const Duration(minutes: 15),
-              ),
+              DateTime.now().add(const Duration(minutes: 15)),
             ),
     );
 
-    if (mounted) {
-      String formattedTime = pickedTime!.format(context);
-
-      if (isStartTime)
-        setState(() => _startTime = formattedTime);
-      else if (!isStartTime)
-        setState(() => _endTime = formattedTime);
-      else
-        print("Time canceled or something went wrong");
+    if (pickedTime == null) {
+      // User canceled the picker
+      print("Time selection was canceled");
+      return;
     }
+
+    // Convert TimeOfDay to a formatted string
+    final now = DateTime.now();
+    final selectedDateTime = DateTime(
+      now.year,
+      now.month,
+      now.day,
+      pickedTime.hour,
+      pickedTime.minute,
+    );
+
+    String formattedTime = DateFormat("hh:mm a").format(selectedDateTime);
+
+    setState(() {
+      if (isStartTime) {
+        _startTime = formattedTime;
+      } else {
+        _endTime = formattedTime;
+      }
+    });
   }
 }

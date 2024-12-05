@@ -27,13 +27,15 @@ class _NotificationPageState extends State<NotificationPage> {
         leading: IconButton(
           onPressed: () => Get.back(),
           icon: const Icon(Icons.arrow_back_ios),
-          color: Get.isDarkMode ? primaryClr : darkGreyClr,
+          color: Get.isDarkMode ? primaryClr : Colors.white,
         ),
         elevation: 0,
         backgroundColor: context.theme.primaryColor,
         title: Text(
           _payload.toString().split("|")[0],
-          style: headingStyle,
+          style: headingStyle.copyWith(
+            color: Colors.white,
+          ),
         ),
       ),
       body: SafeArea(
